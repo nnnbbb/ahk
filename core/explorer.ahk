@@ -1,39 +1,26 @@
 #IfWinActive ahk_exe explorer.exe
 
-$j::
+$+j::
     Send {Down}
 return
 
-$k::
+$+k::
     Send {Up}
 return
 
-$h::
+$+h::
     Send !{Left}
 return
 
-$l::
+$+l::
     Send !{Right}
 return
 
-$g::
-    GetKeyState, CapLck, CapsLock, T
-    if ( CapLck == "D" ) {
-        Send {End}
-    } else if (A_TimeSincePriorHotkey < 400) and ( A_PriorHotkey = "g" ) {
-        Send {Home}
-    }
-return
-
-$+g::
-    Send {End}
-return
-
-$o::
+$+o::
     Send {AppsKey}
 return
 
-$p::
+$+p::
     OpenTerminal("cmd")
 return
 
@@ -42,6 +29,14 @@ return
 $#p::
     OpenTerminal("powershell")
 return
+
+#If WinActive("ahk_exe explorer.exe")
+
+$esc::
+    Send ^w
+return
+
+#If
 
 OpenTerminal(shellType)
 {

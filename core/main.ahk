@@ -7,13 +7,45 @@ GroupAdd OneNoteGroup, ahk_exe onenote.exe
 GroupAdd VsCodeGroup, ahk_exe Code.exe
 
 ; dev
-$^s::
-    Send ^{s}
-    sleep 100
-    reload
-return
+; $^s::
+;     Send ^{s}
+;     sleep 100
+;     reload
+; return
 
 #IfWinNotActive ahk_exe League of Legends.exe
+
+$#'::
+  Send “”
+  Send {Left}
+return
+
+$#.::
+  Send 。
+return
+
+$#,::
+  Send ，
+return
+
+$#/::
+  Send ？
+return
+
+$#x::
+    if (A_PriorHotkey = A_ThisHotkey && A_TimeSincePriorHotkey < 600) {
+        ; 双击处理
+        FormatTime, Time,, yyyy-MM-dd HH:mm:ss
+        Send {#}{#} %Time%
+        KeyWait, x  ; 等待按键释放
+    } else {
+        KeyWait, x, T0.1
+        if ErrorLevel {
+            FormatTime, Time,, yyyy-MM-dd
+            Send {#}{#} %Time%
+        }
+    }
+return
 
 $!c::
     ClipSaved := ClipboardAll
